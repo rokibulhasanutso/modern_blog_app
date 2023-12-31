@@ -9,8 +9,8 @@ export default {
       colors: {
         primary: '#1565D8',
         dark: {
-          hard: '#183B56',
-          soft: '#0D2436'
+          hard: '#0D2436',
+          soft: '#183B56'
         }
       },
       fontFamily: {

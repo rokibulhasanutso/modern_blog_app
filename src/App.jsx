@@ -4,6 +4,7 @@ import AuthLayout from "./layouts/AuthLayout";
 import { Suspense, lazy } from "react";
 import PageLoading from "./components/loading/PageLoading";
 import NotFound from "./pages/notfound/NotFound";
+import Home from "./pages/home/Home";
 const MainLayout = lazy(() => import("./layouts/MainLayout"))
 
 const App = () => {
@@ -12,7 +13,13 @@ const App = () => {
     {
       path: '/',
       element: <Suspense fallback={<PageLoading/>}><MainLayout/></Suspense>,
-      errorElement: <NotFound/>
+      errorElement: <NotFound/>,
+      children: [
+        {
+          path: "/",
+          element: <Home/>,
+        }
+      ]
     },
     {
       path: '/auth',
