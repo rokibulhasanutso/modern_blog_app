@@ -3,8 +3,13 @@ import images from './../constants/images';
 import DropDown from './dropdown/DropDown';
 import { useState } from 'react';
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { IoIosSunny, IoIosMoon } from "react-icons/io";
+import { useDispatch, useSelector } from 'react-redux';
+import { setThemeDirectly } from '../store/theme/themeSlice';
 
 const HeaderNav = () => {
+    const { theme } = useSelector((state) => state.theme)
+    const dispatch = useDispatch()
 
     const [dropDownShow, setDropDownShow ] = useState(false)
 
@@ -81,6 +86,24 @@ const HeaderNav = () => {
                             </ul>
                         </nav>
                         
+                        <div className='self-stretch flex items-center'>
+                            <button
+                                className=''
+                                onClick={() => {
+                                    theme === 'dark' 
+                                    ? dispatch(setThemeDirectly("light")) 
+                                    : dispatch(setThemeDirectly("dark"))
+                                }}
+                            >
+                                {
+                                    theme === 'dark'
+                                    ? <IoIosSunny  className='text-orange-300 text-2xl'/>
+                                    : <IoIosMoon  className='text-slate-400 text-2xl'/>
+                                }
+                                
+                            </button>
+                        </div>
+
                         <div>
                             <button
                                 className='text-primary font-bold font-opensans text-base bg-white border-2 border-primary rounded-full px-10 py-3'
