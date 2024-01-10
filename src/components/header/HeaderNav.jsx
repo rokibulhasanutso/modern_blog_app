@@ -1,11 +1,11 @@
 import { NavLink } from 'react-router-dom';
-import images from './../constants/images';
-import DropDown from './dropdown/DropDown';
+import images from '../../constants/images';
+import DropDown from '../dropdown/DropDown';
 import { useState } from 'react';
 import { IoIosSunny, IoIosMoon, IoIosMenu, IoIosClose } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
-import { setThemeDirectly } from '../store/theme/themeSlice';
-import ExpandDropDown from './dropdown/ExpandDropDown';
+import { setThemeDirectly } from '../../store/theme/themeSlice';
+import ExpandDropDown from '../dropdown/ExpandDropDown';
 
 const HeaderNav = () => {
     const { theme } = useSelector((state) => state.theme)
@@ -33,7 +33,7 @@ const HeaderNav = () => {
             <header className='app-container py-5 relative'>
 
                 {/* navigation */}
-                <div className='px-6 sm:px-3 flex justify-between items-center'>
+                <div className='px-4 flex justify-between items-center'>
                     {/* logo */}
                     <div>
                         <img src={images.Logo} alt="Logo Image"/>
@@ -98,7 +98,7 @@ const HeaderNav = () => {
 
                         <div>
                             <button
-                                className='text-primary dark:bg-dark-hard hover:bg-primary hover:text-white dark:hover:text-white font-bold font-opensans text-base bg-white border-2 border-primary rounded-full px-10 py-3'
+                                className='text-primary dark:text-white dark:bg-primary hover:bg-primary dark:hover:bg-blue-700 hover:text-white dark:hover:text-white font-bold font-opensans text-base bg-white border-2 border-primary rounded-full px-10 py-3'
                                 onClick={() => {}}
                             >
                                 Sign in
@@ -164,8 +164,6 @@ const HeaderNav = () => {
                         </ul>
                     </nav>
                 </div>
-
-
             </header>
         </div>
     );

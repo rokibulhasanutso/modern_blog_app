@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import themeSetup from "../../utils/themeSetup";
+// import themeSetup from "../../utils/themeSetup";
 
 const initialState = {
     theme: null,
@@ -14,8 +14,8 @@ export const themeSlice = createSlice({
         setThemeDirectly: (state, actions) => {
             state.theme = actions.payload
             localStorage.setItem('theme', actions.payload)
-            themeSetup(() => {})
-            // document.documentElement.classList = actions.payload
+            // themeSetup(() => {})
+            document.documentElement.classList = actions.payload
         }
     },
 })

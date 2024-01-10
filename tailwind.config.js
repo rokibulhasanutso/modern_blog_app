@@ -11,7 +11,8 @@ export default {
         primary: '#1565D8',
         dark: {
           hard: '#0D2436',
-          soft: '#183B56'
+          soft: '#183B56',
+          deep: '#061C2E',
         }
       },
       fontFamily: {

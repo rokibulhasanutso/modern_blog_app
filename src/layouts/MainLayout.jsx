@@ -1,14 +1,21 @@
 import { Outlet } from "react-router-dom";
-import HeaderNav from "../components/HeaderNav";
-import Footer from "../components/Footer";
+import HeaderNav from "../components/header/HeaderNav";
+import HeroBackground from "../pages/home/container/HeroBackground";
+import Footer from './../components/footer/Footer';
 
 const MainLayout = () => {
     return (
-        <div>
+        <>
+            {/* for set back */}
+            <HeroBackground/>
             <HeaderNav/>
-            {/* <Outlet/>
-            <Footer/> */}
-        </div>
+
+            <main className="relative">
+                <Outlet/>
+            </main>
+            
+            <Footer/>
+        </>
     );
 };
 
