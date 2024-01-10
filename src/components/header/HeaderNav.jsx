@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import images from '../../constants/images';
 import DropDown from '../dropdown/DropDown';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoIosSunny, IoIosMoon, IoIosMenu, IoIosClose } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import { setThemeDirectly } from '../../store/theme/themeSlice';
@@ -10,8 +10,34 @@ import ExpandDropDown from '../dropdown/ExpandDropDown';
 const HeaderNav = () => {
     const { theme } = useSelector((state) => state.theme)
     const dispatch = useDispatch()
-
     const [expandNav, setExpandNav ] = useState(false)
+    const [navFixed, setNavFixed ] = useState(false)
+
+    useEffect(() => {
+        const whenScrollDown = () => {
+            if (window.scrollY > 200) {
+                setNavFixed(true)
+            }
+            else setNavFixed(false)
+        }
+        window.addEventListener('scroll', whenScrollDown)
+        return () => {
+            window.removeEventListener('scroll', whenScrollDown)
+        }
+    }, [])
+
+    useEffect(() => {
+        // when expandnav without close screen width changed then expandnav close 
+        const expandNavFalse = () => {
+            if (expandNav && window.innerWidth > 1024) {
+                setExpandNav(false)
+            }
+        }
+        window.addEventListener('resize', expandNavFalse)
+        return () => {
+           window.removeEventListener('resize', expandNavFalse) 
+        }
+    }, [expandNav])
 
     const navLinkdata = [
         { _id: 1, name: 'home', path: '/'},
@@ -29,14 +55,14 @@ const HeaderNav = () => {
     ];
     
     return (
-        <div className='relative'>
-            <header className='app-container py-5 relative'>
+        <div className={`z-[9999] transition-[background] duration-0 sticky ${expandNav ? 'bg-white dark:bg-dark-soft top-0' : navFixed ? 'top-0 opacity-100 bg-white dark:bg-dark-soft shadow-md' : 'delay-300'}`}>
+            <header className='app-container relative'>
 
                 {/* navigation */}
-                <div className='px-4 flex justify-between items-center'>
+                <div className='px-4 py-5 flex justify-between items-center'>
                     {/* logo */}
                     <div>
-                        <img src={images.Logo} alt="Logo Image"/>
+                        <img src={ theme === 'light' ? images.Logo : images.LogoWhenDark} alt="Logo Image"/>
                     </div>
 
                     <button
@@ -107,62 +133,64 @@ const HeaderNav = () => {
                     </div>
                 </div>
 
-                {/* when screen width is lower then 1024px */}
-                <div className={`lg:hidden ${expandNav ? 'h-full' : 'h-0'} overflow-hidden app-container fixed left-0 right-0 pt-5 px-6 sm:px-3`}>
-                    <div className='flex justify-end space-x-6 '>
-                        <div className='self-stretch flex items-center '>
-                            <button
-                                className=''
-                                onClick={() => {
-                                    theme === 'dark' 
-                                    ? dispatch(setThemeDirectly("light")) 
-                                    : dispatch(setThemeDirectly("dark"))
-                                }}
-                            >
+                {/* when screen width is lower then 1024px, and show this menu content*/}
+                <div className={`lg:hidden ${expandNav ? 'max-h-full' : 'max-h-0'} shadow-xl transition-[max-height] duration-300 bg-white dark:bg-dark-soft overflow-hidden fixed top-[76px] left-0 right-0`}>
+                    <div className='app-container py-5 px-6 sm:px-3'>
+                        <div className='flex justify-end space-x-6'>
+                            <div className='self-stretch flex items-center '>
+                                <button
+                                    className=''
+                                    onClick={() => {
+                                        theme === 'dark' 
+                                        ? dispatch(setThemeDirectly("light")) 
+                                        : dispatch(setThemeDirectly("dark"))
+                                    }}
+                                >
+                                    {
+                                        theme === 'dark'
+                                        ? <IoIosSunny  className='text-orange-300 text-2xl'/>
+                                        : <IoIosMoon  className='text-slate-400 text-2xl'/>
+                                    }
+                                </button>
+                            </div>
+
+                            <div>
+                                <button
+                                    className='px-4 py-2 rounded-md dark:bg-dark-hard bg-indigo-500 font-semibold text-white dark:text-slate-400 active:scale-95 shadow-md'
+                                    onClick={() => {}}
+                                >
+                                    Sign in
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <nav className='py-5'>
+                            <ul className='space-y-6'>
                                 {
-                                    theme === 'dark'
-                                    ? <IoIosSunny  className='text-orange-300 text-2xl'/>
-                                    : <IoIosMoon  className='text-slate-400 text-2xl'/>
+                                    navLinkdata.map((data, index) => (
+                                        data.hasOwnProperty('dropdown') 
+                                        ? <ExpandDropDown data={data} key={data._id}/>
+
+                                        : <li 
+                                            key={data._id || index}
+                                            className='capitalize font-opensans font-semibold text-base self-stretch'
+                                        >
+                                                <NavLink
+                                                    to={data.path}
+                                                    className={"h-full flex items-center"}
+                                                >
+                                                    {
+                                                        ({isActive}) => (
+                                                            <span className={isActive ? 'text-primary' : 'text-dark-soft dark:text-slate-400'}>{data.name}</span>
+                                                        )
+                                                    }
+                                                </NavLink>
+                                        </li>
+                                    ))
                                 }
-                            </button>
-                        </div>
-
-                        <div>
-                            <button
-                                className='px-4 py-2 rounded-md dark:bg-dark-soft bg-indigo-500 font-semibold text-white dark:text-slate-400 active:scale-95 shadow-md'
-                                onClick={() => {}}
-                            >
-                                Sign in
-                            </button>
-                        </div>
+                            </ul>
+                        </nav>
                     </div>
-                    
-                    <nav className='py-5'>
-                        <ul className='space-y-6'>
-                            {
-                                navLinkdata.map((data, index) => (
-                                    data.hasOwnProperty('dropdown') 
-                                    ? <ExpandDropDown data={data} key={data._id}/>
-
-                                    : <li 
-                                        key={data._id || index}
-                                        className='capitalize font-opensans font-semibold text-base self-stretch'
-                                      >
-                                            <NavLink
-                                                to={data.path}
-                                                className={"h-full flex items-center"}
-                                            >
-                                                {
-                                                    ({isActive}) => (
-                                                        <span className={isActive ? 'text-primary' : 'text-dark-soft dark:text-slate-400'}>{data.name}</span>
-                                                    )
-                                                }
-                                            </NavLink>
-                                      </li>
-                                ))
-                            }
-                        </ul>
-                    </nav>
                 </div>
             </header>
         </div>
