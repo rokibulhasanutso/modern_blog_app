@@ -3,7 +3,7 @@ import images from "../../constants/images";
 
 const Footer = () => {
     return (
-        <div className="py-10 bg-dark-hard dark:bg-dark-deep">
+        <div className="py-10 pt-12 sm:pt-16 md:pt-[128px] bg-dark-hard dark:bg-dark-deep">
             <div className="app-container px-4">
                 <div className="md:flex md:flex-row-reverse md:gap-x-[52px]">
                     <div className="md:flex-grow">

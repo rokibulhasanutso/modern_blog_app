@@ -1,7 +1,7 @@
 
 const BlogContentCard = ({data}) => {
     return (
-        <div className="rounded-xl shadow-lg bg-white dark:bg-dark-soft">
+        <div className="rounded-xl shadow-lg bg-white dark:bg-dark-deep">
             <div className="w-full overflow-hidden rounded-t-xl pb-6 md:pb-9">
                 <img
                     className="w-full"

@@ -2,9 +2,10 @@ import { Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import PageLoading from "../components/loading/PageLoading";
 import MainLayout from "../layouts/MainLayout";
+import AuthLayout from "../layouts/AuthLayout";
 import NotFound from "../pages/notfound/NotFound";
 import Home from "../pages/home/Home";
-import AuthLayout from "../layouts/AuthLayout";
+import Article from './../pages/articles/Article';
 
 const mainRoute = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ const mainRoute = createBrowserRouter([
         {
           path: "/",
           element: <Home/>,
+        },
+        {
+          path: "articles",
+          element: <Article/>,
         }
       ]
     },

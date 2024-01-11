@@ -55,7 +55,7 @@ const HeaderNav = () => {
     ];
     
     return (
-        <div className={`z-[9999] transition-[background] duration-0 sticky ${expandNav ? 'bg-white dark:bg-dark-soft top-0' : navFixed ? 'top-0 opacity-100 bg-white dark:bg-dark-soft shadow-md' : 'delay-300'}`}>
+        <div className={`z-[9999] transition-[background] duration-0 sticky ${expandNav ? 'bg-white dark:bg-dark-deep top-0' : navFixed ? 'top-0 opacity-100 bg-white dark:bg-dark-deep shadow-md' : 'delay-300'}`}>
             <header className='app-container relative'>
 
                 {/* navigation */}
@@ -134,7 +134,7 @@ const HeaderNav = () => {
                 </div>
 
                 {/* when screen width is lower then 1024px, and show this menu content*/}
-                <div className={`lg:hidden ${expandNav ? 'max-h-full' : 'max-h-0'} shadow-xl transition-[max-height] duration-300 bg-white dark:bg-dark-soft overflow-hidden fixed top-[76px] left-0 right-0`}>
+                <div className={`lg:hidden ${expandNav ? 'max-h-full' : 'max-h-0'} shadow-xl transition-[max-height] duration-300 bg-white dark:bg-dark-deep overflow-hidden fixed top-[76px] left-0 right-0`}>
                     <div className='app-container py-5 px-6 sm:px-3'>
                         <div className='flex justify-end space-x-6'>
                             <div className='self-stretch flex items-center '>

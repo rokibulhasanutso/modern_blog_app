@@ -93,7 +93,7 @@ const Home = () => {
                     <path id="Wave" fillRule="evenodd" clipRule="evenodd" d="M2160 262.5H0V0C360 80 720 120 1080 120C1440 120 1800 80 2160 0V262.5Z" fill="currentColor"/>
                 </svg>
             </div>
-            <div className="bg-dark-hard dark:bg-dark-deep -mt-1 pb-[138px]">
+            <div className="bg-dark-hard dark:bg-dark-deep -mt-1 pb-10 sm:pb-[112px] md:pb-[138px]">
                 {/* story delivery form */}
                 <div className="app-container flex flex-col-reverse xl:flex-row justify-between items-center px-4">
                     <div className="max-w-[400px] sm:max-w-[555px] xl:mt-0 mt-20">
