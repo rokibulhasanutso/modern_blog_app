@@ -1,6 +1,5 @@
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import App from './../App';
 import PageLoading from "../components/loading/PageLoading";
 import MainLayout from "../layouts/MainLayout";
 import ProfileLayout from "../layouts/ProfileLayout";
@@ -8,7 +7,13 @@ import AuthLayout from "../layouts/AuthLayout";
 import NotFound from "../pages/notfound/NotFound";
 import Home from "../pages/home/Home";
 import Article from './../pages/articles/Article';
-import Profile from "../pages/profile/Profile";
+import Profile from "../pages/profile/container/ProfileSideBar";
+import ProfileHome from "../pages/profile/ProfileHome";
+import CreatePost from "../pages/profile/container/CreatePost";
+import ContentEditable from "../pages/profile/container/ContentEditable";
+
+const delay = (component) => new Promise((resolve) => setTimeout(() => resolve(component), 2500));
+const App = lazy(() => delay(import('../App')))
 
 const mainRoute = createBrowserRouter([
     {
@@ -36,8 +41,16 @@ const mainRoute = createBrowserRouter([
           children: [
             {
               path: "profile",
-              element: <Profile/>,
-            }
+              element: <ProfileHome/>,
+            },
+            {
+              path: "createpost",
+              element: <CreatePost/>,
+            },
+            {
+              path: "demoedit",
+              element: <ContentEditable/>,
+            },
           ]
         },
         {

@@ -21,3 +21,25 @@
 .tags {
     @apply bg-primary/10 text-sm text-primary px-5 py-1.5 my-1 font-bold rounded-[4px] cursor-pointer
 }
+
+/* blog post TextEditor style Start */
+
+.text-editor {
+    @apply min-h-10 border rounded-md p-4 mb-5 whitespace-normal font-opensans
+}
+
+.text-editor .text-editor-wrapper {
+    outline: none;
+}
+
+.text-editor-body-placeholder::before {
+    content: 'Your Article body...';
+    position: absolute;
+    color: gray;
+    z-index: -1;
+}
+
+li, p, h1, strong {
+    min-height: 24px;
+}
+/* blog post TextEditor style end */
